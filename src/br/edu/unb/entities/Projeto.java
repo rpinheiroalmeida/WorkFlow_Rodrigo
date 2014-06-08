@@ -25,7 +25,6 @@ public class Projeto implements EntityProvenance {
 	private Set<Experimento> experimentos;
 	private Set<String> nomesInstituicoesParticipantes;
 	private Set<String> nomesInstituicoesFinanciadoras;
-<<<<<<< HEAD:src/br/edu/unb/entities/Projeto.java
 	private Usuario usuario;
 	
 
@@ -35,15 +34,7 @@ public class Projeto implements EntityProvenance {
 	public void setId(Long id) {
 		this.id = id;
 	}
-=======
-	private Set<Experimento> experimentos;
-	
 
-	public Projeto(){
-		this.idProjeto = 0;
-	}
-	
->>>>>>> FETCH_HEAD:src/entidades/Projeto.java
 	/**
 	 * @return the nome
 	 */
@@ -142,29 +133,13 @@ public class Projeto implements EntityProvenance {
 			Set<String> nomesInstituicoesFinanciadoras) {
 		this.nomesInstituicoesFinanciadoras = nomesInstituicoesFinanciadoras;
 	}
-	/**
-	 * @return the idProjeto
-	 */
-	public Long getIdProjeto() {
-		return id;
-	}
-	/**
-	 * @param idProjeto the idProjeto to set
-	 */
-	public void setIdProjeto(Long idProjeto) {
-		this.id = idProjeto;
-	}	
-<<<<<<< HEAD:src/br/edu/unb/entities/Projeto.java
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Set<Experimento> getExperimentos() {
-		return experimentos;
-	}
-=======
 	/**
 	 * @return the experimentos
 	 */
@@ -174,7 +149,6 @@ public class Projeto implements EntityProvenance {
 	/**
 	 * @param experimentos the experimentos to set
 	 */
->>>>>>> FETCH_HEAD:src/entidades/Projeto.java
 	public void setExperimentos(Set<Experimento> experimentos) {
 		this.experimentos = experimentos;
 	}
@@ -236,7 +210,7 @@ public class Projeto implements EntityProvenance {
 		projeto.setDataHoraFim(DateUtil.string2Date((String) node.getProperty("dataHoraFinal")));
 		projeto.setObservacao((String) node.getProperty("observacao"));
 		projeto.setUsuario(new Usuario());
-		projeto.setIdProjeto(node.getId());
+		projeto.setId(node.getId());
 //
 //		String[] nomesInstituicoesParticipantes = new String[projeto.getNomesInstituicoesParticipantes().size()];
 //		nodeProject.setProperty("instituicoesParticipantes", projeto.getNomesInstituicoesParticipantes().

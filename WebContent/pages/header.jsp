@@ -26,6 +26,8 @@
 	<script src="../jquery/jquery.treeview.js" type="text/javascript"></script>
 	<script src="../_js/funcoes.js" type="text/javascript"></script>
     <script src="../_js/home.js" type="text/javascript"></script>
+    <script src="../d3/d3.js" type="text/javascript"></script>
+    <!-- <script src="http://d3js.org/d3.v3.min.js" type="text/javascript" charset="utf-8"></script> -->
 
 <script src="../jquery/ui/jquery-ui-1.7.2.custom.js" type="text/javascript"></script>
 <script src="../jquery/ui/jquery.ui-contextmenu.js" type="text/javascript"></script>

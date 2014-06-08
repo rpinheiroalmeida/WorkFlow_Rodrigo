@@ -161,4 +161,10 @@ public class Experimento implements EntityProvenance {
 		experimento.setId(node.getId());
 		return experimento;
 	}
+	
+	public static String buildJson(Node node) {
+		return String.format("{id:%d, name: '%s', type:'%s' }", 
+			node.getId(), node.getProperty("nome"), EntityType.ACCOUNT.getName());
+		
+	}
 }

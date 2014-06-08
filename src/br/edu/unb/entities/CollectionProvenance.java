@@ -96,5 +96,11 @@ public class CollectionProvenance implements EntityProvenance {
 		}
 		return collection;
 	}
+	
+	public static String buildJson(Node node) {
+		return String.format("{id:%d, name: '%s', type:'%s' }", 
+			node.getId(), node.getProperty("nome"), EntityType.COLLECTION.getName());
+		
+	}
 
 }

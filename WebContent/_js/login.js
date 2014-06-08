@@ -1,4 +1,7 @@
 jQuery("document").ready(function(){
+	
+	$("document").ajaxStart($.blockUI).ajaxStop($.unblockUI);
+		
 	$("#frmCadastroUsuario").dialog({
     	autoOpen: false,
     	height: 250,

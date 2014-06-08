@@ -1,14 +1,5 @@
 jQuery(document).ready(function(){    
 
-<<<<<<< HEAD
-	$('#excluir').click(function() { 
-        $.blockUI({ overlayCSS: { backgroundColor: '#00f' } }); 
- 
-        setTimeout($.unblockUI, 2000); 
-    });
-	
-=======
->>>>>>> FETCH_HEAD
     $.datepicker.setDefaults($.extend({showMonthAfterYear: false}, $.datepicker.regional['pt-BR']));
     $("#txtInicio").datepicker($.datepicker.regional['pt-BR']);
     $("#txtFim").datepicker($.datepicker.regional['pt-BR']);
@@ -16,56 +7,12 @@ jQuery(document).ready(function(){
     ativaAbaParticipantes();
 	$('#abaParticipante').click(function(){ ativaAbaParticipantes(); });
 	$('#abaFinanciadora').click(function(){ ativaAbaFinanciadoras(); });
-<<<<<<< HEAD
 	
-//	$('#excluir').click(function(){
-//		alert('aaaadsds');
-//		$("#carregando").dialog({
-//	    	autoOpen: false,
-//	    	height: 250,
-//			width: 300,
-//	    	modal: true}).visible = true;
-////		$('#content').load('../pages/project.jsp');
-//	});
-//	
-//	var loading = $("http://www.pinceladasdaweb.com.br/blog/2009/08/03/ajax-load-com-jquery/loading.gif");
-//				//.appendTo(this).hide();
-//	loading.ajaxStart(function(){
-//		$(this).show();
-//	});
-//	loading.ajaxStop(function(){
-//		$(this).hide();
-//	});
-	
-//	 $('#excluir').click(function(){
-//		 	alert('asdas');
-//		 	$.blockUI({ css: { 
-//	            border: 'none', 
-//	            padding: '15px', 
-//	            backgroundColor: '#000', 
-//	            color: '#fff' 
-//	        } }); 
-		 	
-//		 	deletarProjeto();
-//	        $.ajax({
-//	              type: 'POST',
-//	              url: 'www.example.com',
-//	              data: somedata,
-//	              dataType: "json"
-//	        });
-//	 });
-=======
-    
-    
->>>>>>> FETCH_HEAD
 });
 
 
 function salvarProjeto(){
-<<<<<<< HEAD
 	$("carregando").css("display", "inline");
-=======
->>>>>>> FETCH_HEAD
 	$('#lstFinanciadoras option').attr("selected", "selected");
 	$('#lstParticipantes option').attr("selected", "selected");
 
@@ -86,25 +33,16 @@ function salvarProjeto(){
 	    type:'POST',
 	    success: function( data ){
   	    	if (data == "sucesso"){
-<<<<<<< HEAD
   	    		$("carregando").css("display", "none");
 	    		$.prompt("Cadastro salvo com sucesso!");
 	    		window.location.reload(true);
 	    	} else {
 	    		$("carregando").css("display", "none");
-=======
-	    		$.prompt("Cadastro salvo com sucesso!");
-	    		window.location.reload(true);
-	    	} else {
->>>>>>> FETCH_HEAD
 	    		$.prompt("Erro no cadastro. Motivo:" + data);
 	    	}
 	    },	
 	    error: function( xhr, er ){
-<<<<<<< HEAD
 	    	$("carregando").css("display", "none");
-=======
->>>>>>> FETCH_HEAD
 	        $.prompt('Os dados n&atilde;o for&atilde;o salvos. Causa:' + data);
 	    }
 	});

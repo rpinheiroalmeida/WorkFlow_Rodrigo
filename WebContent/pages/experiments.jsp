@@ -35,21 +35,12 @@
 				<div class="rotulo">Anota&ccedil;&otilde;es:</div><textarea id="txtObservacao" name="anotacoes" rows="4" cols="76">${experimento.anotacoes}</textarea><br>			
 			
 				<input type="hidden" name="acao" value="salvar"/>
-<<<<<<< HEAD
 				<input type="hidden" name="idProjeto" id="idProjeto" value="<c:out value="${experimento.projeto.id}"/>"/>
 						
 				<input type="button" value="Limpar" onclick="limparTela()">
 				<c:choose>
 					<c:when test="${not empty experimento.id && experimento.id gt 0}">
 						<input type="hidden" name="idExperimento" id="idExperimento" value="${experimento.id}"/>
-=======
-				<input type="hidden" name="idProjeto" id="idProjeto" value="<c:out value="${experimento.projeto.idProjeto}"/>"/>
-						
-				<input type="button" value="Limpar" onclick="limparTela()">
-				<c:choose>
-					<c:when test="${not empty experimento.idExperimento && experimento.idExperimento gt 0}">
-						<input type="hidden" name="idExperimento" id="idExperimento" value="${experimento.idExperimento}"/>
->>>>>>> FETCH_HEAD
 						<input type="button" value="Excluir" onclick="deletarExperimento()">			
 					</c:when>
 					<c:otherwise>

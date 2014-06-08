@@ -67,7 +67,7 @@ public class ProjetoDao extends BioInformaticaDaoImpl<Projeto> {
 			projeto.setObservacao((String) node.getProperty("observacao"));
 			projeto.setUsuario(new Usuario());
 //			projeto.getUsuario().setNome((String) node.getProperty("usuario"));
-			projeto.setIdProjeto(node.getId());
+			projeto.setId(node.getId());
 			projetos.add(projeto);
 //
 //			String[] nomesInstituicoesParticipantes = new String[projeto.getNomesInstituicoesParticipantes().size()];

@@ -12,12 +12,7 @@ public class Atividade implements EntityProvenance {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-<<<<<<< HEAD:src/br/edu/unb/entities/Atividade.java
 	private Long id;
-=======
-	private Integer idAtividade;
->>>>>>> FETCH_HEAD:src/entidades/Atividade.java
 	private String nomeAtividade;
 	private String nomePrograma;
 	private String versaoPrograma;
@@ -27,12 +22,8 @@ public class Atividade implements EntityProvenance {
 	private Date dataHoraFim;
 	private String nomeArquivo;
 	private Experimento experimentoOrigem;
-<<<<<<< HEAD:src/br/edu/unb/entities/Atividade.java
 	private CollectionProvenance collection;
 
-=======
-	
->>>>>>> FETCH_HEAD:src/entidades/Atividade.java
 	/**
 	 * @return the id
 	 */
@@ -45,8 +36,6 @@ public class Atividade implements EntityProvenance {
 	public void setId(Long idAtividade) {
 		this.id = idAtividade;
 	}
-<<<<<<< HEAD:src/br/edu/unb/entities/Atividade.java
-	
 	public String getNomeAtividade() {
 		return nomeAtividade;
 	}
@@ -54,9 +43,6 @@ public class Atividade implements EntityProvenance {
 		this.nomeAtividade = nomeAtividade;
 	}
 	
-=======
-
->>>>>>> FETCH_HEAD:src/entidades/Atividade.java
 	/**
 	 * @return the nomePrograma
 	 */
@@ -141,7 +127,6 @@ public class Atividade implements EntityProvenance {
 	public void setNomeArquivo(String nomeArquivo) {
 		this.nomeArquivo = nomeArquivo;
 	}
-<<<<<<< HEAD:src/br/edu/unb/entities/Atividade.java
 	
 	public Experimento getExperimentoOrigem() {
 		return experimentoOrigem;
@@ -159,26 +144,6 @@ public class Atividade implements EntityProvenance {
 		return EntityType.ACTIVITY;
 	}
 	
-=======
-	/**
-	 * @return the experimentoOrigem
-	 */
-	public Experimento getExperimentoOrigem() {
-		return experimentoOrigem;
-	}
-	/**
-	 * @param experimentoOrigem the experimentoOrigem to set
-	 */
-	public void setExperimentoOrigem(Experimento experimentoOrigem) {
-		this.experimentoOrigem = experimentoOrigem;
-	}
-	public String getNomeAtividade() {
-		return nomeAtividade;
-	}
-	public void setNomeAtividade(String nomeAtividade) {
-		this.nomeAtividade = nomeAtividade;
-	}
->>>>>>> FETCH_HEAD:src/entidades/Atividade.java
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -213,7 +178,6 @@ public class Atividade implements EntityProvenance {
 		}
 		return true;
 	}
-<<<<<<< HEAD:src/br/edu/unb/entities/Atividade.java
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -228,9 +192,6 @@ public class Atividade implements EntityProvenance {
 		return transforma(node);
 		
 	}
-=======
-
->>>>>>> FETCH_HEAD:src/entidades/Atividade.java
 	
 	public static Atividade transforma(Node node) {
 		Atividade atividade = new Atividade();
@@ -246,5 +207,11 @@ public class Atividade implements EntityProvenance {
 //		atividade.setNomeArquivo((String) node.getProperty("nomeArquivo"));
 		
 		return atividade;
+	}
+	
+	public static String buildJson(Node node) {
+		return String.format("{id:%d, name: '%s', type:'%s' }", 
+			node.getId(), node.getProperty("nomeAtividade"), EntityType.ACTIVITY.getName());
+		
 	}
 }

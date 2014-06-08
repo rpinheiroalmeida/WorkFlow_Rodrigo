@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.edu.unb.dao.BioInformaticaDaoIf;
 import br.edu.unb.dao.impl.ExperimentoDao;
 import br.edu.unb.entities.Experimento;
 import br.edu.unb.entities.Projeto;
@@ -27,7 +26,7 @@ public class ExperimentServlet extends HttpServlet {
 	public static final String NOME_LISTA_EXPERIMENTOS = "listaExperimentos";
 	private static final String OBJETO_EDICAO = "experimento";
 	private Experimento experimento;
-	private BioInformaticaDaoIf<Experimento> daoExperimento;
+	private ExperimentoDao daoExperimento;
 
 	
     /**
@@ -49,7 +48,6 @@ public class ExperimentServlet extends HttpServlet {
 	private void criarExperimentoDao(HttpServletRequest request) throws IOException {
 		if (daoExperimento == null){
 			request.getSession().setAttribute(NOME_LISTA_EXPERIMENTOS, new ArrayList<Projeto>());
-//	        daoExperimento = new ExperimentoDaoImpl((List<Experimento>) request.getSession().getAttribute(NOME_LISTA_EXPERIMENTOS));
 		}		
 	}
 
@@ -67,11 +65,21 @@ public class ExperimentServlet extends HttpServlet {
 			tratarSalvamentoDoObjeto(request, experimento, response.getWriter());
 		} else if (acao.equalsIgnoreCase("consultar") ){
 			experimento = buscarExperimento(request, experimento.getId());
+			System.out.println("JSon List<Atividade> BEGIN: ");
+			System.out.println(daoExperimento.buildJsonAccount(experimento.getId()));
+			System.out.println("JSon List<Atividade> END: ");
 			atualizarSessao(request);
 		} else if (acao.equalsIgnoreCase("excluir")){
 			tratarExclusaoProjeto(experimento, request);
-		} 
-		retornarSucesso(response.getWriter());
+		} else if (acao.equalsIgnoreCase("visualizarGrafo")) {
+			experimento = buscarExperimento(request, experimento.getId());
+			System.out.println("JSon List<Atividade> BEGIN: ");
+			String jSonData =  daoExperimento.buildJsonAccount(experimento.getId());
+			System.out.println(jSonData);
+			System.out.println("JSon List<Atividade> END: ");
+			request.getSession().setAttribute("data", jSonData);
+		}
+ 		retornarSucesso(response.getWriter());
 	}
 
 	private void tratarExclusaoProjeto(Experimento experimento, HttpServletRequest request) {
@@ -95,7 +103,7 @@ public class ExperimentServlet extends HttpServlet {
 		//adiciona o experimento lista dos experimentos do projeto
 		Projeto projeto;
 		try {
-			projeto = this.buscarProjeto(Long.valueOf(experimento.getProjeto().getIdProjeto()), request);
+			projeto = this.buscarProjeto(Long.valueOf(experimento.getProjeto().getId()), request);
 			if (projeto.getExperimentos() == null){
 				projeto.setExperimentos(new HashSet<Experimento>());
 			}
@@ -144,9 +152,9 @@ public class ExperimentServlet extends HttpServlet {
 		experimento.setNome(request.getParameter("nomeExperimento"));
 		experimento.setProjeto(new Projeto());
 		if (idProjeto != null && !idProjeto.isEmpty() ){
-			experimento.getProjeto().setIdProjeto(Long.valueOf(idProjeto));
+			experimento.getProjeto().setId(Long.valueOf(idProjeto));
 		} else {
-			experimento.getProjeto().setIdProjeto(Long.valueOf(0));
+			experimento.getProjeto().setId(Long.valueOf(0));
 		}
 		
 		experimento.setVersao(request.getParameter("versao"));
@@ -199,7 +207,7 @@ public class ExperimentServlet extends HttpServlet {
 		if (projetos != null && projetos.size() >0){
 
 			for(Projeto p : projetos){
-				if (idProjeto.equals(p.getIdProjeto())){
+				if (idProjeto.equals(p.getId())){
 					return p;
 				}
 			}

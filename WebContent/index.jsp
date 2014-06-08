@@ -19,9 +19,8 @@
 	<link rel="stylesheet" type="text/css" href="jquery/tabs.css"/>
 	
 	<!--jquery-->	
-    <script src="jquery/jquery-1.11.1.js" type="text/javascript"></script>
-    <!-- <script src="jquery/jquery.js" type="text/javascript"></script> -->
-    <script src="jquery/jquery.blockUI.js" type="text/javascript"></script>
+    <!-- <script src="jquery/jquery-1.11.1.js" type="text/javascript"></script> -->
+    <script src="jquery/jquery.js" type="text/javascript"></script>
     <script src="jquery/jquery.impromptu.2.7.js" type="text/javascript"></script>
     <script src="jquery/ui/jquery-ui-1.7.2.custom.js" type="text/javascript"></script>
     <script src="jquery/ui/ui.dialog.js" type="text/javascript"></script>

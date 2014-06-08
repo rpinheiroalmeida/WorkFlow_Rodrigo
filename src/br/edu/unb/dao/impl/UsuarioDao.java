@@ -23,7 +23,6 @@ import br.edu.unb.entities.Experimento;
 import br.edu.unb.entities.Projeto;
 import br.edu.unb.entities.RelationshipProvenanceType;
 import br.edu.unb.entities.Usuario;
-import br.edu.unb.util.DateUtil;
 
 
 
@@ -149,30 +148,6 @@ public class UsuarioDao extends BioInformaticaDaoImpl<Usuario> {
 		return projetos;
 	}
 	
-	
-	
-	private List<Projeto> montaListaProjetos(ExecutionResult result) {
-		Iterator<Node> n_column = result.columnAs( "n" );
-		Projeto projeto = null;
-		List<Projeto> projetos = new ArrayList<>();
-		for ( Node node : IteratorUtil.asIterable( n_column ) )
-		{
-			projeto = new Projeto();
-			projeto.setNome((String) node.getProperty("nome"));
-			projeto.setDescricao((String) node.getProperty("descricao"));
-			projeto.setCoordenador((String) node.getProperty("coordenador"));
-			projeto.setDataHoraInicio(DateUtil.string2Date((String) node.getProperty("dataHoraInicial")));
-			projeto.setDataHoraFim(DateUtil.string2Date((String) node.getProperty("dataHoraFinal")));
-			projeto.setObservacao((String) node.getProperty("observacao"));
-			projeto.setUsuario(new Usuario());
-			projeto.getUsuario().setNome((String) node.getProperty("usuario"));
-			projeto.setIdProjeto(node.getId());
-			projetos.add(projeto);
-
-		}
-		return projetos;
-	}
-
 	@Override
 	protected Node createNode(Usuario object) {
 		return null;

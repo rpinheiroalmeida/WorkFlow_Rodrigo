@@ -16,7 +16,6 @@
 <body>
 
 <div id="formCadProjeto">
-<<<<<<< HEAD
 	
 	<!--  <div id="carregando" style="display: inline; color: green;">Carregando...</div>  -->
 	<div id="carregando" style="display: none;">
@@ -32,8 +31,6 @@
 		</font>
 	</div>
 	
-=======
->>>>>>> FETCH_HEAD
 	<form id="frmManter">
 		<fieldset class="cadastros">
 			<legend>Manuten&ccedil;&atilde;o de Projetos</legend>
@@ -88,16 +85,10 @@
 			<input type="hidden" name="acao" value="salvar"/>
 			<input type="button" value="Limpar" onclick="limparTela()">
 			<c:choose>
-<<<<<<< HEAD
 				<c:when test="${not empty projeto.id && projeto.id gt 0}">
 					<input type="hidden" name="idProjeto" id="idProjeto" value="<c:out value="${projeto.id}"/>"/>
 					<!--  <input type="button" id="excluir" value="Excluir" onclick="deletarProjeto()"> -->
 					<input type="button" id="excluir" value="Excluir">			
-=======
-				<c:when test="${not empty projeto.idProjeto && projeto.idProjeto gt 0}">
-					<input type="hidden" name="idProjeto" id="idProjeto" value="<c:out value="${projeto.idProjeto}"/>"/>
-					<input type="button" value="Excluir" onclick="deletarProjeto()">			
->>>>>>> FETCH_HEAD
 				</c:when>
 				<c:otherwise>
 					<input type="hidden" name="idProjeto" id="idProjeto" value="0"/>

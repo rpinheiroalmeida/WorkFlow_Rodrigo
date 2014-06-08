@@ -15,18 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
 import br.edu.unb.dao.BioInformaticaDaoIf;
 import br.edu.unb.dao.impl.ProjetoDao;
 import br.edu.unb.entities.Projeto;
 import br.edu.unb.entities.Usuario;
-=======
-import dao.BioInformaticaDaoIf;
-import dao.impl.ProjetoDao;
-import entidades.Atividade;
-import entidades.Experimento;
-import entidades.Projeto;
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
 
 /**
  * Servlet implementation class ProjectServlet
@@ -36,10 +28,7 @@ public class ProjectServlet extends HttpServlet {
        
 	protected static final String NOME_LISTA_PROJETOS = "listaProjetos";
 	private static final String PROJETO_EDICAO = "projeto";
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
 	private static final String NOME_USUARIO_NA_SESSAO= "usuarioLogado";
-=======
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
 	private BioInformaticaDaoIf<Projeto> daoProjeto;
 	private Projeto projetoEdicao = new Projeto();
 	
@@ -81,11 +70,7 @@ public class ProjectServlet extends HttpServlet {
 		} else if (acao.equalsIgnoreCase("salvar")){
 			tratarSalvamentoDoProjeto(request, projeto, response.getWriter());
 		} else if (acao.equalsIgnoreCase("consultar") ){
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
-			projetoEdicao= buscarProjeto(request, projeto.getIdProjeto());
-=======
-			projetoEdicao= buscarProjeto(projeto.getIdProjeto());
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
+			projetoEdicao= buscarProjeto(request, projeto.getId());
 			atualizarRequest(request);
 			retornarSucesso(response.getWriter());
 		} else if (acao.equalsIgnoreCase("excluir")){
@@ -93,12 +78,8 @@ public class ProjectServlet extends HttpServlet {
 			retornarSucesso(response.getWriter());
 		} else if (acao.equalsIgnoreCase("listar") ){
 			//response.getWriter().write(this.montarXml(daoProjeto.listar()));
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
 			List<Projeto> projetos = daoProjeto.listar();
 			atualizarSessao(request, projetos);
-=======
-			atualizarSessao(request);
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
 		}
 	}
 
@@ -113,21 +94,17 @@ public class ProjectServlet extends HttpServlet {
 	}
 	
 	private void tratarSalvamentoDoProjeto(HttpServletRequest request, Projeto projeto, PrintWriter writer) {
-		if (projeto.getIdProjeto() != null && projeto.getIdProjeto() > 0){
+		if (projeto.getId() != null && projeto.getId() > 0){
 			daoProjeto.alterar(projeto);
 		} else {
 			Projeto pProjeto = (Projeto) daoProjeto.incluir(projeto);
 			projeto.setId(pProjeto.getId());
 		}
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
+
 		List<Projeto> projetos = obterProjetosSessao(request);
 		projetos.add(projeto);
 		atualizarRequest(request);		
 		atualizarSessao(request, projetos);
-=======
-		atualizarRequest(request);		
-		atualizarSessao(request);
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
 		retornarSucesso(writer);
 	}
 
@@ -161,7 +138,7 @@ public class ProjectServlet extends HttpServlet {
 		Usuario usuario = (Usuario) request.getSession().getAttribute(NOME_USUARIO_NA_SESSAO);
 		
 		projeto.setUsuario(usuario);
-		projeto.setIdProjeto((idProjeto != null && !idProjeto.equals("0"))? Long.valueOf(idProjeto) : null);
+		projeto.setId((idProjeto != null && !idProjeto.equals("0"))? Long.valueOf(idProjeto) : null);
 		projeto.setNome(request.getParameter("nome"));
 		
 		projeto.setCoordenador(request.getParameter("coordenador"));
@@ -196,27 +173,17 @@ public class ProjectServlet extends HttpServlet {
 		}
 	}
 
-<<<<<<< HEAD:src/br/edu/unb/servlets/ProjectServlet.java
 	private Projeto buscarProjeto(HttpServletRequest request, Long idProjeto) throws IOException {
 		@SuppressWarnings("unchecked")
 		List<Projeto> projetos = (List<Projeto>) request.getSession().getAttribute(ProjectServlet.NOME_LISTA_PROJETOS);
 		if (projetos != null && !projetos.isEmpty()) {
 			for (Projeto projeto : projetos) {
-				if (idProjeto.equals(projeto.getIdProjeto())) {
+				if (idProjeto.equals(projeto.getId())) {
 					return projeto;
 				}
 			}
 		}
 		return daoProjeto.recuperar(idProjeto);
-=======
-	private Projeto buscarProjeto(Integer idProjeto) throws IOException {
-		for(Projeto projeto : daoProjeto.listar()){
-			if (idProjeto.equals(projeto.getIdProjeto())){
-				return projeto;
-			}
-		}
-		return null;
->>>>>>> FETCH_HEAD:src/servlets/ProjectServlet.java
 	}
 
 /*	private String montarXml(List<Projeto> listaProjetos) {

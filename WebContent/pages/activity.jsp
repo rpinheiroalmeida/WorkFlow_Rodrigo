@@ -55,22 +55,13 @@
 				<input type="hidden" id="txtNomeArquivo" name="nomeArquivo"/>
 				<input type="hidden" name="acao" value="salvar"/>
 				
-<<<<<<< HEAD
 				<input type="hidden" id="idExperimento" name="idExperimento" value="${atividade.experimentoOrigem.id}"/>
-=======
-				<input type="hidden" id="idExperimento" name="idExperimento" value="${atividade.experimentoOrigem.idExperimento}"/>
->>>>>>> FETCH_HEAD
 				
 				<input type="button" value="Executar Comando" onclick="executarComando()">
 				<input type="button" value="Limpar" onclick="limparTela()">
 				<c:choose>
-<<<<<<< HEAD
 					<c:when test="${not empty atividade.id && atividade.id gt 0}">
 					    <input type="hidden" name="idAtividade" id="idAtividade" value="${atividade.id}"/>
-=======
-					<c:when test="${not empty atividade.idAtividade && atividade.idAtividade gt 0}">
-					    <input type="hidden" name="idAtividade" id="idAtividade" value="${atividade.idAtividade}"/>
->>>>>>> FETCH_HEAD
 						<input type="button" value="Excluir" onclick="deletarAtividade()"/>			
 					</c:when>
 					<c:otherwise>

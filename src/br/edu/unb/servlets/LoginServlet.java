@@ -1,11 +1,7 @@
 package br.edu.unb.servlets;
 
 import java.io.IOException;
-<<<<<<< HEAD:src/br/edu/unb/servlets/LoginServlet.java
 import java.util.Arrays;
-=======
-import java.util.ArrayList;
->>>>>>> FETCH_HEAD:src/servlets/LoginServlet.java
 import java.util.Enumeration;
 import java.util.List;
 
@@ -26,12 +22,7 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-<<<<<<< HEAD:src/br/edu/unb/servlets/LoginServlet.java
 //	private static final String NOME_USR_PADRAO = "Rodrigo Pinheiro";
-=======
-	private static final String NOME_USR_PADRAO = "Rodrigo Pinheiro";
->>>>>>> FETCH_HEAD:src/servlets/LoginServlet.java
-	
 	private static final String NOME_USUARIO_NA_SESSAO= "usuarioLogado";
 	private static final String NOME_LISTA_USUARIOS = "listaUsuarios";
 	protected static final String NOME_LISTA_PROJETOS = "listaProjetos";

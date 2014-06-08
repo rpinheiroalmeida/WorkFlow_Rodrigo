@@ -1,15 +1,10 @@
 $(document).ready(function(){
 
-	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+//	$("document").ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	
 	$("#projetos").treeview();
 	
-<<<<<<< HEAD
 });
-=======
-	
-}); 
->>>>>>> FETCH_HEAD
 
 function abrirTela(nome, id){
 	var nomeServlet = "";
@@ -28,11 +23,7 @@ function abrirTela(nome, id){
 		paramsServlet = "idAtividade="+id;
 		nome = "activity.jsp";
 	} else {
-<<<<<<< HEAD
 		$.prompt("PÃ¡gina invÃ¡lida!");
-=======
-		$.prompt("Página inválida!");
->>>>>>> FETCH_HEAD
 		return;
 	}
 	
@@ -59,12 +50,18 @@ function novaAtividade(idExperimento){
 	fecharTodosMenus();
 }
 
+function visualizarExperimento(idExperimento){
+	enviar("../experiment.do?acao=visualizarGrafo&idExperimento="+idExperimento, "visualizarExperimento.jsp", true, "exibicao_conteudo");
+	fecharTodosMenus();
+}
+
 
 function enviar(pUrl, pNomeTelaAbrir, pAbreNoFrame, pIdTela ){
 	$.ajax({
 		url:pUrl,
 		dataType:'html',
 		type:'POST',
+		
 		success: function( data ){
 			if (data == "sucesso"){
 				if (pAbreNoFrame){
@@ -90,11 +87,7 @@ function fecharTodosMenus(){
 }
 
 function mostrarContexto(pElemOrigem, pIdMenu){
-<<<<<<< HEAD
 	//pegar a posiÃ§Ã£o do clique
-=======
-	//pegar a posição do clique
->>>>>>> FETCH_HEAD
 	fecharTodosMenus();
 	var menu = document.getElementById(pIdMenu);
 	var posicaoElemento = getPosicaoElemento(pElemOrigem.id);

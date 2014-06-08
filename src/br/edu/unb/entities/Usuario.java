@@ -86,7 +86,7 @@ public class Usuario implements EntityProvenance {
 		}
 		return true;
 	}
-<<<<<<< HEAD:src/br/edu/unb/entities/Usuario.java
+
 	@Override
 	public EntityType getType() {
 		return EntityType.AGENT;
@@ -100,11 +100,13 @@ public class Usuario implements EntityProvenance {
 		pUsuario.setId(node.getId());
 		
 		return pUsuario;
-=======
-	
-	public static void main(String[] args) {
-		System.out.println( System.getProperties() );
->>>>>>> FETCH_HEAD:src/entidades/Usuario.java
 	}
+	
+	public static String buildJson(Node node) {
+		return String.format("{id:%d, name: '%s', type:'%s' }", 
+			node.getId(), node.getProperty("nome"), EntityType.AGENT.getName());
+		
+	}
+	
 
 }
