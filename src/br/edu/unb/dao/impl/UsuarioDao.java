@@ -19,6 +19,7 @@ import org.neo4j.graphdb.index.Index;
 import org.neo4j.helpers.collection.IteratorUtil;
 
 import br.edu.unb.entities.Atividade;
+import br.edu.unb.entities.EntityType;
 import br.edu.unb.entities.Experimento;
 import br.edu.unb.entities.Projeto;
 import br.edu.unb.entities.RelationshipProvenanceType;
@@ -126,19 +127,22 @@ public class UsuarioDao extends BioInformaticaDaoImpl<Usuario> {
 				Iterable<Relationship> allRelHasAccount = nodeProject.getRelationships(Direction.OUTGOING);
 				for (Relationship relHasAccount : allRelHasAccount) {
 					Node nodeExperiment = relHasAccount.getOtherNode(nodeProject);
-					Experimento experimento = Experimento.transforma(nodeExperiment);
 					
-					atividades = new HashSet<>();
-					Iterable<Relationship> allRelHasActivity = nodeExperiment.getRelationships(Direction.OUTGOING);
-					for (Relationship relHasActivity : allRelHasActivity) {
-						Node nodeActivity = relHasActivity.getOtherNode(nodeExperiment);
-						Atividade atividade = Atividade.transforma(nodeActivity);
-						System.out.println("Id Atividade = " + atividade.getId());
-						atividade.setExperimentoOrigem(experimento);
-						atividades.add(atividade);
-					}
-					experimento.setAtividades(atividades);
-					experimentos.add(experimento);
+//					if (nodeExperiment.getProperty("type").equals(EntityType.ACCOUNT)) {
+						Experimento experimento = Experimento.transforma(nodeExperiment);
+						
+						atividades = new HashSet<>();
+						Iterable<Relationship> allRelHasActivity = nodeExperiment.getRelationships(Direction.OUTGOING);
+						for (Relationship relHasActivity : allRelHasActivity) {
+							Node nodeActivity = relHasActivity.getOtherNode(nodeExperiment);
+							Atividade atividade = Atividade.transforma(nodeActivity);
+							System.out.println("Id Atividade = " + atividade.getId());
+							atividade.setExperimentoOrigem(experimento);
+							atividades.add(atividade);
+						}
+						experimento.setAtividades(atividades);
+						experimentos.add(experimento);
+//					}
 				}
 				projeto.setExperimentos(experimentos);
 				projetos.add(projeto);

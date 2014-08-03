@@ -86,8 +86,56 @@ public class ExperimentoDao extends BioInformaticaDaoImpl<Experimento> {
 		myRelationship.setProperty("relationship-type", RelationshipProvenanceType.HAS.getName());;
 	}
 	
+//	public String buildJsonAccount(Long idExperimento) {
+//		StringBuilder jsonNodes = new StringBuilder("\"nodes\" : [");
+//		StringBuilder jsonLinks = new StringBuilder("\"edges\" : [");
+//		Set<Long> idsUsados = new HashSet<>();
+//		try(Transaction tx = getManagerConnection().beginTx())  {
+//			Node root = getManagerConnection().getGraphDb().getNodeById(idExperimento);
+//			Iterable<Relationship> allRelationships = root.getRelationships(Direction.OUTGOING);
+//			if (allRelationships != null) {
+//				for (Relationship relationship : allRelationships) {
+//					System.out.println(relationship.getStartNode().getId() + " --> " +relationship.getType() +
+//							" --> " + relationship.getEndNode().getId());
+//				
+//					Node nodeActivity = relationship.getEndNode();
+//					if (!idsUsados.contains(nodeActivity.getId())) {
+//						jsonNodes.append(Atividade.buildJson(nodeActivity)).append(",");
+//						idsUsados.add(nodeActivity.getId());
+//					}
+//					for (Relationship relActivity : nodeActivity.getRelationships()) {
+//						if (relActivity.getProperty("relationship-type").equals(RelationshipProvenanceType.USED.getName())) {
+//							Node endNode = relActivity.getEndNode();
+//							if (!idsUsados.contains(endNode.getId())) {
+//								jsonNodes.append(CollectionProvenance.buildJson(endNode)).append(",");
+//								idsUsados.add(endNode.getId());
+//							}
+//						}
+//						if (relActivity.getProperty("relationship-type").equals(RelationshipProvenanceType.WAS_ASSOCIATED_WITH.getName())) {
+//							Node endNode = relActivity.getStartNode();
+//							if (!idsUsados.contains(endNode.getId())) {
+//								jsonNodes.append(Usuario.buildJson(endNode)).append(",");
+//								idsUsados.add(endNode.getId());
+//							}
+//						}
+//						if (!idsUsados.contains(relActivity.getId())) {
+//							jsonLinks.append("{source : ").append(relActivity.getStartNode().getId()).append(", target : ")
+//								.append(relActivity.getEndNode().getId()).append(" ,type: '")
+//								.append(relActivity.getProperty("relationship-type"))
+//								.append("'}").append(",");
+//						}
+//					}
+//				}
+//			}
+//		}
+//		jsonNodes.deleteCharAt(jsonNodes.length()-1).append("]");
+//		jsonLinks.deleteCharAt(jsonLinks.length()-1).append("]");
+//		return "{" +  jsonNodes.toString() + " , " + jsonLinks.toString() + "}";
+//		
+//	}
+
+	
 	public String buildJsonAccount(Long idExperimento) {
-	//   "links": [  {"source": "1","target": "2" }, { "source": "1", "target": "3" }]
 		StringBuilder jsonNodes = new StringBuilder("\"nodes\" : [");
 		StringBuilder jsonLinks = new StringBuilder("\"edges\" : [");
 		Set<Long> idsUsados = new HashSet<>();
@@ -107,13 +155,35 @@ public class ExperimentoDao extends BioInformaticaDaoImpl<Experimento> {
 							Node collectionUsed = relationshipUsed.getEndNode();
 							if (!idsUsados.contains(collectionUsed.getId())) {
 								jsonNodes.append(CollectionProvenance.buildJson(collectionUsed)).append(",");
-								idsUsados.add(nodeActivity.getId());
+								idsUsados.add(collectionUsed.getId());
 							}
 							if (!idsUsados.contains(relationshipUsed.getId())) {
 								jsonLinks.append("{source : ").append(nodeActivity.getId()).append(", target : ")
 									.append(collectionUsed.getId()).append(" ,type: '").append(relationshipUsed.getProperty("relationship-type"))
 									.append("'}").append(",");
 							}
+							
+							Iterable<Relationship> relsWasDerivedFrom = collectionUsed.getRelationships(RelationshipProvenanceType.WAS_DERIVED_FROM);
+							if (relsWasDerivedFrom != null)  {
+								for (Relationship relWasDerivedFrom : relsWasDerivedFrom) {
+									Node startNode = relWasDerivedFrom.getStartNode();
+									Node endNode = relWasDerivedFrom.getEndNode();
+									if (!idsUsados.contains(startNode.getId())) {
+										jsonNodes.append(CollectionProvenance.buildJson(startNode)).append(",");
+										idsUsados.add(startNode.getId());
+									}
+									if (!idsUsados.contains(endNode.getId())) {
+										jsonNodes.append(CollectionProvenance.buildJson(endNode)).append(",");
+										idsUsados.add(endNode.getId());
+									}
+									if (!idsUsados.contains(relWasDerivedFrom.getId())) {
+										jsonLinks.append("{source : ").append(startNode.getId()).append(", target : ")
+											.append(endNode.getId()).append(" ,type: '").append(relWasDerivedFrom.getProperty("relationship-type"))
+											.append("'}").append(",");
+									}
+								}
+							}
+							
 						}
 					}
 					Iterable<Relationship> relsWasAssociatedWith = nodeActivity.getRelationships(RelationshipProvenanceType.WAS_ASSOCIATED_WITH);
@@ -129,6 +199,45 @@ public class ExperimentoDao extends BioInformaticaDaoImpl<Experimento> {
 									.append(nodeAgent.getId()).append(" ,type: '").append(relWasAssociatedWith.getProperty("relationship-type"))
 									.append("'}").append(",");
 							}
+							
+						}
+					}
+					Iterable<Relationship> relsWasGeneratedBy = nodeActivity.getRelationships(RelationshipProvenanceType.WAS_GENERATED_BY);
+					if (relsWasGeneratedBy != null)  {
+						for (Relationship relWasGeneratedBy : relsWasGeneratedBy) {
+							Node nodeCollection = relWasGeneratedBy.getOtherNode(nodeActivity);
+							if (!idsUsados.contains(nodeCollection.getId())) {
+								jsonNodes.append(CollectionProvenance.buildJson(nodeCollection)).append(",");
+								idsUsados.add(nodeCollection.getId());
+							}
+							if (!idsUsados.contains(relWasGeneratedBy.getId())) {
+								jsonLinks.append("{source : ").append(nodeCollection.getId()).append(", target : ")
+									.append(nodeActivity.getId()).append(" ,type: '").append(relWasGeneratedBy.getProperty("relationship-type"))
+									.append("'}").append(",");
+							}
+							
+//							Iterable<Relationship> relsWasDerivedFrom = nodeCollection.getRelationships(RelationshipProvenanceType.WAS_DERIVED_FROM);
+//							if (relsWasDerivedFrom != null)  {
+//								for (Relationship relWasDerivedFrom : relsWasDerivedFrom) {
+//									Node startNode = relWasDerivedFrom.getStartNode();
+//									Node endNode = relWasDerivedFrom.getEndNode();
+//									if (!idsUsados.contains(startNode.getId())) {
+//										jsonNodes.append(CollectionProvenance.buildJson(startNode)).append(",");
+//										idsUsados.add(startNode.getId());
+//									}
+//									if (!idsUsados.contains(endNode.getId())) {
+//										jsonNodes.append(CollectionProvenance.buildJson(endNode)).append(",");
+//										idsUsados.add(endNode.getId());
+//									}
+//									if (!idsUsados.contains(relWasDerivedFrom.getId())) {
+//										jsonLinks.append("{source : ").append(startNode.getId()).append(", target : ")
+//											.append(endNode.getId()).append(" ,type: '").append(relWasDerivedFrom.getProperty("relationship-type"))
+//											.append("'}").append(",");
+//									}
+//								}
+//							}
+							
+							
 						}
 					}
 				}

@@ -17,38 +17,38 @@
 <div id="formCadAtividade" title="">
 	<form id="frmManterAtividade">
 		<fieldset class="cadastros">
-				<legend>Manuten&ccedil;&atilde;o de atividades</legend>
-				<div  class="rotulo">Nome da Atividade:</div>
+				<legend>Activity</legend>
+				<div  class="rotulo">Name:</div>
 				<input type=text id="txtNome" name="nomeAtividade" maxlength="50" style="width:500px"  value="${atividade.nomeAtividade}">
 				<br>
 				
-				<div  class="rotulo">Programa:</div>
+				<div  class="rotulo">Program:</div>
 				<input type=text id="txtPrograma" name="nomePrograma" maxlength="50" style="width:500px"  value="${atividade.nomePrograma}">
 				<br>
 				
-				<div class="rotulo">Vers&atilde;o:</div>
+				<div class="rotulo">Version:</div>
 				<input type="text" id="txtVersao" name="versaoPrograma" maxlength="50" size="22"  value="${atividade.versaoPrograma}">
 				<br>
 
-				<div class="rotulo">Fun&ccedil;&atilde;o:</div>
+				<div class="rotulo">Function:</div>
 				<input type="text" id="txtFuncao" name="funcao" maxlength="50" style="width:500px"  value="${atividade.funcao}">
 				<br>
 				
-				<div class="rotulo">Data/Hora in&iacute;cio:</div>
+				<div class="rotulo">Start Date/Hour:</div>
 				<input type="text" id="txtInicioAtividade" name="dataInicio" maxlength="50" size="20"  value="<fmt:formatDate value="${atividade.dataHoraInicio}" pattern="dd/MM/yyyy"/>">
 				<input type="text" id="txtHoraInicioAtividade" name="horaInicio" maxlength="50" size="10"  value="<fmt:formatDate value="${atividade.dataHoraInicio}" pattern="hh:mm"/>">
 				<br>
 				
-				<div class="rotulo">Data/Hora fim:</div>
+				<div class="rotulo">End Date/Hour:</div>
 				<input type="text" id="txtFimAtividade" name="dataFim" maxlength="50" size="20"  value="<fmt:formatDate value="${atividade.dataHoraFim}" pattern="dd/MM/yyyy"/>">
 				<input type="text" id="txtHoraFimAtividade" name="horaFim" maxlength="50" size="10"  value="<fmt:formatDate value="${atividade.dataHoraFim}" pattern="hh:mm"/>">
 				<br>
 				
-				<div class="rotulo">Linha de comando:</div>
+				<div class="rotulo">Command line:</div>
 				<textarea id="txtComando" name="linhaComando" rows="5" maxlength="100" style="width: 500px">${atividade.linhaComando}</textarea>
 				<br>
 				
-				<div class="rotulo">Arquivo:</div>
+				<div class="rotulo">File:</div>
 				<div id="nomeArquivoSelecionado"></div>
 				<iframe src="upload.jsp" id="frameUpload" style="width:500px"></iframe>		
 				<br>
@@ -57,12 +57,12 @@
 				
 				<input type="hidden" id="idExperimento" name="idExperimento" value="${atividade.experimentoOrigem.id}"/>
 				
-				<input type="button" value="Executar Comando" onclick="executarComando()">
-				<input type="button" value="Limpar" onclick="limparTela()">
+				<input type="button" value="Run command" onclick="executarComando()">
+				<input type="button" value="Clean" onclick="limparTela()">
 				<c:choose>
 					<c:when test="${not empty atividade.id && atividade.id gt 0}">
 					    <input type="hidden" name="idAtividade" id="idAtividade" value="${atividade.id}"/>
-						<input type="button" value="Excluir" onclick="deletarAtividade()"/>			
+						<input type="button" value="Clean" onclick="deletarAtividade()"/>			
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" name="idAtividade" id="idAtividade" value="0"/>		
@@ -70,7 +70,7 @@
 				</c:choose>
 				
 				
-				<input type="button" value="Salvar" onclick="salvarAtividade()">
+				<input type="button" value="Save" onclick="salvarAtividade()">
 		</fieldset>
 	</form>
 

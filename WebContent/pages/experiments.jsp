@@ -20,34 +20,34 @@
 <div id="formCadExperimento">
 	<form id="frmManter">
 		<fieldset class="cadastros">
-			<legend>Manuten&ccedil;&atilde;o de Experimentos</legend>
-				<div class="rotulo">Nome:</div>
+			<legend>Account</legend>
+				<div class="rotulo">Name:</div>
 				<input type="text" id="txtNome" name="nomeExperimento" maxlength="50" size="100" value="${experimento.nome}"><br>				
 				
-				<div class="rotulo">Descri&ccedil;&atilde;o:</div><input type="text" id="txtDescricao" name="descricao" maxlength="50" size="100" value="${experimento.descricao}"><br>
+				<div class="rotulo">Description:</div><input type="text" id="txtDescricao" name="descricao" maxlength="50" size="100" value="${experimento.descricao}"><br>
 				<div class="rotulo">Local:</div><input type="text" id="txtLocal" name="localExecucao" maxlength="50" size="100" value="${experimento.localExecucao}"><br>
-				<div class="rotulo">Vers&atilde;o:</div><input type="text" id="txtVersao" name="versao" maxlength="50" size="10" value="${experimento.versao}"><br>
+				<div class="rotulo">Version:</div><input type="text" id="txtVersao" name="versao" maxlength="50" size="10" value="${experimento.versao}"><br>
 										
-				<div class="rotulo">Data in&iacute;cio:</div><input type="text" id="txtDataInicio" name="dataInicio" value="<fmt:formatDate value="${experimento.dataHoraInicio}" pattern="dd/MM/yyyy"/>"><br>				
-			    <div class="rotulo">Data fim:</div><input type="text" id="txtDataFim" name="dataFim" value="<fmt:formatDate value="${experimento.dataHoraFim}" pattern="dd/MM/yyyy"/>"><br>
-			    <div class="rotulo">Data vers&atilde;o:</div><input type="text" id="txtDataVersao" name="dataVersao" value="<fmt:formatDate value="${experimento.dataVersao}" pattern="dd/MM/yyyy"/>"><br>
+				<div class="rotulo">Start Date:</div><input type="text" id="txtDataInicio" name="dataInicio" value="<fmt:formatDate value="${experimento.dataHoraInicio}" pattern="dd/MM/yyyy"/>"><br>				
+			    <div class="rotulo">End Date:</div><input type="text" id="txtDataFim" name="dataFim" value="<fmt:formatDate value="${experimento.dataHoraFim}" pattern="dd/MM/yyyy"/>"><br>
+			    <div class="rotulo">Version Date:</div><input type="text" id="txtDataVersao" name="dataVersao" value="<fmt:formatDate value="${experimento.dataVersao}" pattern="dd/MM/yyyy"/>"><br>
 									
-				<div class="rotulo">Anota&ccedil;&otilde;es:</div><textarea id="txtObservacao" name="anotacoes" rows="4" cols="76">${experimento.anotacoes}</textarea><br>			
+				<div class="rotulo">Annotation:</div><textarea id="txtObservacao" name="anotacoes" rows="4" cols="76">${experimento.anotacoes}</textarea><br>			
 			
 				<input type="hidden" name="acao" value="salvar"/>
 				<input type="hidden" name="idProjeto" id="idProjeto" value="<c:out value="${experimento.projeto.id}"/>"/>
 						
-				<input type="button" value="Limpar" onclick="limparTela()">
+				<input type="button" value="Clean" onclick="limparTela()">
 				<c:choose>
 					<c:when test="${not empty experimento.id && experimento.id gt 0}">
 						<input type="hidden" name="idExperimento" id="idExperimento" value="${experimento.id}"/>
-						<input type="button" value="Excluir" onclick="deletarExperimento()">			
+						<input type="button" value="Delete" onclick="deletarExperimento()">			
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" name="idExperimento" id="idExperimento" value="0"/>		
 					</c:otherwise>
 				</c:choose>
-				<input type="button" value="Salvar" onclick="salvarExperimento()">						
+				<input type="button" value="Save" onclick="salvarExperimento()">						
 		</fieldset>	
 	</form>	
 </div>
